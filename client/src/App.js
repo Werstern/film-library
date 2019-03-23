@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import './App.css';
 
+import Layout from './hoc/Layout/Layout';
+
 class App extends Component {
   state = {
-    films: []
+    films: [],
+    additing: false,
+    searching: false,
+    search_type: '',
+    search_value: '',
+    loading: false,
+    error: ''
   }
 
   componentDidMount() {
@@ -14,11 +22,13 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <h1>Films</h1>
-        {this.state.films.map(film =>
-          <div key={film._id}>{film.title}</div>
-        )}
+      <div>
+        <Layout>
+          <h1>Films</h1>
+          {this.state.films.map(film =>
+            <div key={film._id}>{film.title}</div>
+          )}
+        </Layout>
       </div>
     );
   }
