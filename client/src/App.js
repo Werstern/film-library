@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 import Layout from './hoc/Layout/Layout';
+import FilmLibrary, { FilmsLibrary } from './containers/FilmsLibrary/FilmsLibrary';
 
 class App extends Component {
   state = {
@@ -25,9 +26,7 @@ class App extends Component {
       <div>
         <Layout>
           <h1>Films</h1>
-          {this.state.films.map(film =>
-            <div key={film._id}>{film.title}</div>
-          )}
+          <FilmsLibrary films={this.state.films} />
         </Layout>
       </div>
     );
