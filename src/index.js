@@ -3,6 +3,8 @@ const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
 
+const config = require('./config.json');
+
 const filmsRoute = require('./routes/films');
 const filmRoute = require('./routes/film');
 
@@ -22,7 +24,6 @@ app.use((err, req, res, next) => {
   res.sendFile(path.join(__dirname, '../public/500.html'))
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Listening on http://localhost:${PORT}`);
+app.listen(config.serverPort, () => {
+  console.log(`Listening on http://localhost:${config.serverPort}`);
 });
