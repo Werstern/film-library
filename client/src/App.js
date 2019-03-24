@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css';
 
 import Layout from './hoc/Layout/Layout';
 import FilmLibrary, { FilmsLibrary } from './containers/FilmsLibrary/FilmsLibrary';
@@ -16,7 +16,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('/films/4')
+    fetch('/films/6')
       .then(res => res.json())
       .then(films => this.setState({ films }));
   }
@@ -25,7 +25,7 @@ class App extends Component {
     return (
       <div>
         <Layout>
-          <h1>Films</h1>
+          <h1 className={classes.AppTitle}>Popular Movies</h1>
           <FilmsLibrary films={this.state.films} />
         </Layout>
       </div>

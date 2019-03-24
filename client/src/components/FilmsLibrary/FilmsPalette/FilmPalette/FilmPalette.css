@@ -1,0 +1,73 @@
+.FilmPalette {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    width: 483px;
+    background-color: #fff;
+    box-sizing: border-box;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.FilmPalette > .ImageContent {
+    width: 185px;
+    height: 278px;
+    line-height: 0;
+    overflow: hidden;
+}
+
+.FilmPalette > .ContentInfo {
+    width: 298px;
+    height: 278px;
+    position: relative;
+    box-sizing: border-box;
+    padding: 10px 16px 16px 16px;
+    overflow: hidden;
+}
+
+.ContentInfo > .WrapperTitle {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.WrapperTitle > .Title {
+    width: 100%;
+    font-weight: 600;
+    font-size: 1.1em;
+    line-height: 1.1em;
+}
+
+.WrapperTitle > span {
+    color: rgba(0,0,0,0.6);
+    line-height: 1em;
+}
+
+.ContentInfo > .OverView {
+    word-wrap: break-word;
+    white-space: normal;
+    color: #4d4d4d;
+    font-size: 0.9em;
+    line-height: 1.2em;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0;
+    width: 100%;
+}
+
+.ImageContent > img {
+    width: 185px;
+    height: 278px;
+    opacity: 1;
+    outline: none;
+    border: 0;
+}
+
+.FilmSection {
+    font-size: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    margin-block-start: 1.5em;
+    margin-block-end: 0.5em;
+}

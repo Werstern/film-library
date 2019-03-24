@@ -17,9 +17,7 @@ export class FilmsLibrary extends Component {
                 <Modal show={this.state.showing} modalClosed={this.shovingCancelHandler}>
                     <ActionSummary />
                 </Modal>
-                <div>
-                    <FilmsPalette films={this.props.films} />
-                </div>
+                <FilmsPalette films={this.props.films} />
             </Auxiliary>
         )
     }

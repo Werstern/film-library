@@ -8,9 +8,19 @@ const password = '8743b52063cd84097a65d1633f5c74f5';
 mongoose.connect(`mongodb://${user}:${password}@${server}/${datebase}`);
 
 const FilmSchema = new mongoose.Schema({
-  title: String,
-  releaseYear: String,
-  format: String,
+  title: {
+    type: String,
+    required: true
+  },
+  image: String,
+  releaseYear: {
+    type: String,
+    required: true
+  },
+  format: {
+    type: String,
+    required: true
+  },
   stars: [String]
 });
 
