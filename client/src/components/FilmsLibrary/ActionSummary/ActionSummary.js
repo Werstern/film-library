@@ -1,14 +1,143 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-import Auxiliary from '../../../hoc/Auxiliary/Auxiliary';
 import Button from '../../UI/Button/Button';
+import Spinner from '../../../components/UI/Spinner/Spinner';
+import classes from './ActionSummary.css';
+import Input from '../../../components/UI/Input/Input';
+import { updateObject, checkValidaty } from '../../../shared/utility';
 
-const actionSummary = (props) => {
-    return (
-        <Auxiliary>
-            <h3>Adding Menu</h3>
-        </Auxiliary>
-    )
+class ActionSummary extends Component {
+    state = {
+        addingForm: {
+          title: {
+            elementType: 'input',
+            elementConfig: {
+              type: 'text',
+              placeholder: 'Film Title'
+            },
+            value: '',
+            validation: {
+              required: true
+            },
+            valid: false,
+            touched: false
+          },
+          releaseYear: {
+            elementType: 'input',
+            elementConfig: {
+              type: 'text',
+              placeholder: 'Release year'
+            },
+            value: '',
+            validation: {
+              required: true
+            },
+            valid: false,
+            touched: false
+          },
+          stars: {
+            elementType: 'input',
+            elementConfig: {
+              type: 'text',
+              placeholder: 'Film stars'
+            },
+            value: '',
+            validation: {
+              required: true
+            },
+            valid: false,
+            touched: false
+          },
+          image: {
+            elementType: 'input',
+            elementConfig: {
+              type: 'text',
+              placeholder: 'Image URL'
+            },
+            value: '',
+            validation: {},
+            valid: true
+          },
+          format: {
+            elementType: 'select',
+            elementConfig: {
+              options: [
+                {value: 'VHS', displayValue: 'VHS'},
+                {value: 'DVD', displayValue: 'DVD'},
+                {value: 'Blu-Ray', displayValue: 'Blu-Ray'}
+              ]
+            },
+            value: 'Blue-Ray',
+            validation: {},
+            valid: true
+          },
+        },
+        formIsValid: false
+    }
+
+    orderHandler = (event) => {
+        event.preventDefault();
+
+        const formData = {};
+        for (let formElementIdentifier in this.state.addingForm) {
+            formData[formElementIdentifier] = this.state.addingForm[formElementIdentifier].value;
+        }
+        
+        this.props.onAddingFilm(formData);
+    }
+
+    inputChangedHandler = (event, inputIdentifier) => {
+        const updatedFormElement = updateObject(this.state.addingForm[inputIdentifier], {
+            value: event.target.value,
+            valid: checkValidaty(event.target.value, this.state.addingForm[inputIdentifier].validation),
+            touched: true
+        });
+        const updatedAddingForm = updateObject(this.state.addingForm, {
+            [inputIdentifier]: updatedFormElement
+        });
+
+        let formIsValid = true;
+        for (let inputIdentifier in updatedAddingForm) {
+            formIsValid = updatedAddingForm[inputIdentifier].valid && formIsValid;
+        }
+
+        this.setState({addingForm: updatedAddingForm, formIsValid: formIsValid});
+    }
+
+    render() {
+        const formElementsArray = [];
+        for (let key in this.state.addingForm) {
+            formElementsArray.push({
+              id: key,
+              config: this.state.addingForm[key]
+            });
+        }
+        let form = (
+            <form onSubmit={this.orderHandler}>
+                {formElementsArray.map(formElement => (
+                    <Input
+                        key={formElement.id}
+                        elementType={formElement.config.elementType}
+                        elementConfig={formElement.config.elementConfig}
+                        value={formElement.config.value}
+                        shouldValidate={formElement.config.validation}
+                        touched={formElement.config.touched}
+                        invalid={!formElement.config.valid}
+                        changed={(event) => this.inputChangedHandler(event, formElement.id)} />
+                ))}
+                <Button btnType="Success" disabled={!this.state.formIsValid}>Add</Button>
+            </form>
+        );
+        if (this.props.loading) {
+            form = <Spinner />;
+        }
+        return (
+            <div className={classes.ActionSummary}>
+                <h4>Adding Menu</h4>
+                {form}
+            </div>
+        );
+    }
 };
 
-export default actionSummary;
+export default ActionSummary;
