@@ -5,9 +5,10 @@ import NavigationItem from './NavigationItem/NavigationItem';
 
 const navigationItems = (props) => (
     <ul className={classes.NavigationItems}>
-        <NavigationItem link="search">Search</NavigationItem>
+        <NavigationItem link="search" onSearchStart={props.onSearchStart}>Search</NavigationItem>
         <NavigationItem link="add">Add Film</NavigationItem>
     </ul>
 );
 
 export default navigationItems;
+

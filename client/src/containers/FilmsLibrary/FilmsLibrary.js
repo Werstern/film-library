@@ -7,14 +7,10 @@ import ActionSummary from '../../components/FilmsLibrary/ActionSummary/ActionSum
 
 export class FilmsLibrary extends Component {
 
-    state = {
-        showing: false
-    }
-
     render() {
         return (
             <Auxiliary>
-                <Modal show={this.state.showing} modalClosed={this.shovingCancelHandler}>
+                <Modal show={this.props.searching} modalClosed={this.props.onSearchCancel}>
                     <ActionSummary />
                 </Modal>
                 <FilmsPalette films={this.props.films} />

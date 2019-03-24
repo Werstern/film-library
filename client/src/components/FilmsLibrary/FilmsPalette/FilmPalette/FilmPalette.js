@@ -6,7 +6,7 @@ const filmPalette = (props) => {
     return (
         <div className={classes.FilmPalette}>
             <div className={classes.ImageContent}>
-                <img src={props.image} />
+                <img src={props.image} alt={props.title} />
             </div>
             <div className={classes.ContentInfo}>
                 <div className={classes.WrapperTitle}>
