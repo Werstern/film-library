@@ -8,6 +8,10 @@ const navigationItem = (props) => {
         if (props.link === 'search') {
             props.onSearchStart();
         }
+
+        if(props.link === 'add') {
+            props.onAddingStart();
+        }
     };
 
     return (

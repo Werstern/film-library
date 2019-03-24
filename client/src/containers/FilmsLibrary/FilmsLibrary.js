@@ -10,7 +10,7 @@ export class FilmsLibrary extends Component {
     render() {
         return (
             <Auxiliary>
-                <Modal show={this.props.searching} modalClosed={this.props.onSearchCancel}>
+                <Modal show={this.props.adding} modalClosed={this.props.onAdditingCancel}>
                     <ActionSummary />
                 </Modal>
                 <FilmsPalette films={this.props.films} />

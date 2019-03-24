@@ -12,7 +12,9 @@ const toolbar = (props) => (
             <Logo />
         </div>
         <nav className={classes.DesktopOnly}>
-            <NavigationItems onSearchStart={props.onSearchStart} />
+            <NavigationItems 
+                onSearchStart={props.onSearchStart}
+                onAddingStart={props.onAddingStart} />
         </nav>
     </header>
 );
