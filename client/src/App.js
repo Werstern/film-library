@@ -12,13 +12,31 @@ class App extends Component {
     search_value: '',
     adding: false,
     loading: false,
+    deleting: false,
+    deleting_id: '',
     error: ''
   }
 
   componentDidMount() {
-    fetch('/films/6')
+    fetch('/films/12')
       .then(res => res.json())
       .then(films => this.setState({ films }));
+  }
+
+  deletingStartHandler = (id) => {
+    this.setState({deleting: true, deleting_id: id});
+  }
+
+  deleteFinishHandler = (id) => {
+    const updatedFilms = [...this.state.films].filter(film => {
+      return film._id !== id;
+    });
+
+    this.setState({films: updatedFilms});
+  }
+
+  deletingCancelHandler = () => {
+    this.setState({deleting: false, deleting_id: ''});
   }
 
   addingStartHandler = () => {
@@ -48,7 +66,12 @@ class App extends Component {
           <FilmsLibrary 
             films={this.state.films}
             adding={this.state.adding}
-            onAdditingCancel={this.addingCancelHandler} />
+            onAdditingCancel={this.addingCancelHandler}
+            deleting={this.state.deleting}
+            onDeletingStart={this.deletingStartHandler}
+            onDeletingFinish={this.deleteFinishHandler}
+            onDeletingCancel={this.deletingCancelHandler}
+            deleting_id={this.state.deleting_id} />
         </Layout>
       </div>
     );

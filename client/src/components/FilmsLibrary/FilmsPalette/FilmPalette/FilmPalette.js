@@ -1,6 +1,7 @@
 import React from 'react';
 
 import classes from './FilmPalette.css';
+import deleteIcon from '../../../../assets/images/delete.png';
 
 const filmPalette = (props) => {
     return (
@@ -10,10 +11,17 @@ const filmPalette = (props) => {
             </div>
             <div className={classes.ContentInfo}>
                 <div className={classes.WrapperTitle}>
-                    <div className={classes.Title}>
-                        {props.title}
+                    <div 
+                        className={classes.DeleteContainer}
+                        onClick={props.onDeletingStart}>
+                        <img src={deleteIcon} alt="delete" />
                     </div>
-                    <span>{props.releaseYear}</span>
+                    <div>
+                        <div className={classes.Title}>
+                            {props.title}
+                        </div>
+                        <span>{props.releaseYear}</span>
+                    </div>
                 </div>
                 <div className={classes.FilmSection}>Format Video</div>
                 <p className={classes.OverView}>

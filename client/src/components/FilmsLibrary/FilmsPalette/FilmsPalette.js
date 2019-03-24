@@ -15,6 +15,7 @@ const filmsPalette = (props) => {
                     releaseYear={film.releaseYear}
                     format={film.format}
                     stars={film.stars}
+                    onDeletingStart={() => props.onDeletingStart(film._id)}
                 />
             ))}
         </div>

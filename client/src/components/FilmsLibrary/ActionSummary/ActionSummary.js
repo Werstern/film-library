@@ -63,9 +63,9 @@ class ActionSummary extends Component {
             elementType: 'select',
             elementConfig: {
               options: [
+                {value: 'Blu-Ray', displayValue: 'Blu-Ray'},
                 {value: 'VHS', displayValue: 'VHS'},
-                {value: 'DVD', displayValue: 'DVD'},
-                {value: 'Blu-Ray', displayValue: 'Blu-Ray'}
+                {value: 'DVD', displayValue: 'DVD'}
               ]
             },
             value: 'Blue-Ray',
@@ -84,7 +84,27 @@ class ActionSummary extends Component {
             formData[formElementIdentifier] = this.state.addingForm[formElementIdentifier].value;
         }
         
-        axios.post('/films', formData);
+        axios.post('/films', formData)
+            .then(films => {
+                const resetState = {...this.state.addingForm};
+                const formIsValid = false
+                for (let formElementIdentifier in resetState) {
+                    if (formElementIdentifier === 'format') {
+                        resetState[formElementIdentifier].value = 'Blue-Ray';
+                        resetState[formElementIdentifier].valid = true;
+                    } else if (formElementIdentifier === 'image') {
+                        resetState[formElementIdentifier].value = '';
+                        resetState[formElementIdentifier].valid = true;
+                    } else {
+                        resetState[formElementIdentifier].value = '';
+                        resetState[formElementIdentifier].valid = false;
+                        resetState[formElementIdentifier].touched = false;
+                    }
+                }
+
+                this.setState({addingForm: resetState, formIsValid: formIsValid})
+                this.props.onAdditingCancel();
+            });
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
