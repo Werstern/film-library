@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import Button from '../../UI/Button/Button';
 import Spinner from '../../../components/UI/Spinner/Spinner';
@@ -83,7 +84,7 @@ class ActionSummary extends Component {
             formData[formElementIdentifier] = this.state.addingForm[formElementIdentifier].value;
         }
         
-        this.props.onAddingFilm(formData);
+        axios.post('/films', formData);
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
