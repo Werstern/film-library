@@ -5,6 +5,7 @@ import FilmsPalette from '../../components/FilmsLibrary/FilmsPalette/FilmsPalett
 import Modal from '../../components/UI/Modal/Modal';
 import ActionSummary from '../../components/FilmsLibrary/ActionSummary/ActionSummary';
 import DeleteSummary from '../../components/FilmsLibrary/DeleteSummary/DeleteSummary';
+import SearchPanel from '../../components/FilmsLibrary/SearchPanel/SearchPanel';
 
 export class FilmsLibrary extends Component {
 
@@ -20,6 +21,13 @@ export class FilmsLibrary extends Component {
                         onDeletingCancel={this.props.onDeletingCancel}
                         onDeletingFinish={this.props.onDeletingFinish} />
                 </Modal>
+                {
+                    this.props.searching ? 
+                        <SearchPanel 
+                            onSearchCancel={this.props.onSearchCancel}
+                            onSearchFinish={this.props.onSearchFinish} />
+                        : null
+                }
                 <FilmsPalette 
                     films={this.props.films}
                     onDeletingStart={this.props.onDeletingStart} />

@@ -4,8 +4,12 @@ import filmLogo from '../../assets/images/film-logo.png';
 import classes from './Logo.css';
 
 const logo = (props) => (
-    <div className={classes.Logo}>
-        <img src={filmLogo} alt="FilmLogo" />
+    <div 
+        className={classes.Logo}
+        onClick={props.clicked} >
+        <img 
+            src={filmLogo} 
+            alt="FilmLogo" />
     </div>
 );
 

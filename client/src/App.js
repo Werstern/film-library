@@ -8,8 +8,6 @@ class App extends Component {
   state = {
     films: [],
     searching: false,
-    search_type: '',
-    search_value: '',
     adding: false,
     loading: false,
     deleting: false,
@@ -51,8 +49,34 @@ class App extends Component {
     this.setState({searching: true});
   }
 
+  searchFinishHandler = (films) => {
+    if (Array.isArray(films)) {
+      this.setState({
+        films: films,
+        searching: false 
+      });
+    } else if (films === null) {
+      this.setState({
+        films: [],
+        searching: false 
+      });
+    } else {
+      const updatedFilm = [films];
+      this.setState({
+        films: updatedFilm,
+        searching: false 
+      });
+    }
+  }
+
   searchCancelHandler = () => {
     this.setState({searching: false});
+  }
+
+  returnHomepageHandler = () => {
+    fetch('/films/12')
+      .then(res => res.json())
+      .then(films => this.setState({ films }));
   }
 
   render() {
@@ -61,17 +85,21 @@ class App extends Component {
         <Layout 
           onSearchStart={this.searchStartHandler}
           onAddingStart={this.addingStartHandler}
-          onAddingCancel={this.addingCancelHandler}>
+          onAddingCancel={this.addingCancelHandler}
+          onReturnHomepage={this.returnHomepageHandler} >
           <h1 className={classes.AppTitle}>Popular Movies</h1>
           <FilmsLibrary 
             films={this.state.films}
             adding={this.state.adding}
+            searching={this.state.searching}
             onAdditingCancel={this.addingCancelHandler}
             deleting={this.state.deleting}
             onDeletingStart={this.deletingStartHandler}
             onDeletingFinish={this.deleteFinishHandler}
             onDeletingCancel={this.deletingCancelHandler}
-            deleting_id={this.state.deleting_id} />
+            onSearchCancel={this.searchCancelHandler}
+            deleting_id={this.state.deleting_id}
+            onSearchFinish={this.searchFinishHandler} />
         </Layout>
       </div>
     );

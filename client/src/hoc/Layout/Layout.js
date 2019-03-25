@@ -27,10 +27,13 @@ class Layout extends Component {
                 <Toolbar 
                     drawerToggleClicked={this.sideDrawerToggleHandler} 
                     onSearchStart={this.props.onSearchStart}
-                    onAddingStart={this.props.onAddingStart} />
+                    onAddingStart={this.props.onAddingStart}
+                    onReturnHomepage={this.props.onReturnHomepage} />
                 <SideDrawer
                     open={this.state.showSideDrawer}
-                    closed={this.sideDrawerClosedHandler} />
+                    closed={this.sideDrawerClosedHandler}
+                    onSearchStart={this.props.onSearchStart}
+                    onAddingStart={this.props.onAddingStart} />
                 <main className={classes.Content}>
                     {this.props.children}
                 </main>

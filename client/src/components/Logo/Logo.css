@@ -9,3 +9,8 @@
 .Logo img {
     height: 100%;
 }
+
+.Logo:hover {
+    cursor: pointer;
+    background-color: #40A4C8;
+}

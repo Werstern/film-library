@@ -19,7 +19,9 @@ const sideDrawer = (props) => {
                     <Logo />
                 </div>
                 <nav>
-                    <NavigationItems />
+                    <NavigationItems 
+                        onAddingStart={props.onAddingStart}
+                        onSearchStart={props.onSearchStart} />
                 </nav>
             </div>
         </Auxiliary>

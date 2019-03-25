@@ -6,7 +6,7 @@ const navigationItem = (props) => {
     const clickHandler = (event) => {
         event.preventDefault();
         if (props.link === 'search') {
-            props.onSearchStart();
+           props.onSearchStart();
         }
 
         if(props.link === 'add') {
