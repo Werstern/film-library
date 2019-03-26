@@ -29,13 +29,13 @@ export class FilmsLibrary extends Component {
         if (this.props.searching) {
             searching = (
                 <SearchPanel 
-                    onSearchCancel={this.props.onSearchCancel}
+                    onSearching={this.props.onSearching}
                     onSearchFinish={this.props.onSearchFinish} />
             );
         }
         return (
             <Auxiliary>
-                <Modal show={this.props.adding} modalClosed={() => this.props.onAdding(false)}>
+                <Modal show={this.props.adding} modalClosed={this.props.onAdding}>
                     <ActionSummary onAdding={this.props.onAdding} />
                 </Modal>
                 <Modal show={this.props.deleting} modalClosed={() => this.props.onDelete(false, '')}>

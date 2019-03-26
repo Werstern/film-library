@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import Button from '../../UI/Button/Button';
 import Input from '../../UI/Input/Input';
+import Spinner from '../../UI/Spinner/Spinner'
 import { updateObject, checkValidaty } from '../../../shared/utility';
 
 import classes from './SearchPanel.css';
@@ -37,7 +38,12 @@ class SearchPanel extends Component {
             },
         },
         formIsValid: false,
-        stage: 0
+        stage: 0,
+        loading: false
+    }
+
+    componentWillUnmount() {
+        this.setState({loading: false});
     }
 
     stepNextHandler = (event, stage) => {
@@ -52,9 +58,9 @@ class SearchPanel extends Component {
                     formData[formElementIdentifier] = this.state.searchingForm[formElementIdentifier].value;
                 }
 
+                this.setState({loading: true});
                 axios.get(`/films?${formData.type}=${formData.title ? formData.title : formData.star}`)
                     .then(films => {
-                        console.log(films.data);
                         this.props.onSearchFinish(films.data);
                     });
                 break;
@@ -67,10 +73,7 @@ class SearchPanel extends Component {
         event.preventDefault();
         switch (stage) {
             case 0:
-                this.props.onSearchCancel();
-                break;
-            case 1:
-                this.setState({stage: 0});
+                this.props.onSearching();
                 break;
             default: 
                 this.setState({stage: 0})
@@ -78,11 +81,20 @@ class SearchPanel extends Component {
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
-        //touched: true
-        const updatedFormElement = updateObject(this.state.searchingForm[inputIdentifier], {
+        let newObject = {
             value: event.target.value,
-            valid: checkValidaty(event.target.value, this.state.searchingForm[inputIdentifier].validation)
-        });
+            valid: checkValidaty(event.target.value, this.state.searchingForm[inputIdentifier].validation),
+            touched: true
+        }
+
+        if (inputIdentifier === 'type') {
+            newObject = {
+                value: event.target.value,
+                valid: checkValidaty(event.target.value, this.state.searchingForm[inputIdentifier].validation)
+            };
+        }
+
+        const updatedFormElement = updateObject(this.state.searchingForm[inputIdentifier], newObject);
         const updatedAddingForm = updateObject(this.state.searchingForm, {
             [inputIdentifier]: updatedFormElement
         });
@@ -94,9 +106,16 @@ class SearchPanel extends Component {
 
         this.setState({searchingForm: updatedAddingForm, formIsValid: formIsValid});
     }
+
+    formValidationHandler = () => {
+        if (this.state.stage === 0) {
+            return false;
+        } else {
+            return !this.state.formIsValid;
+        }
+    }
     
     render() {
-        //!this.state.formIsValid
         const formElementsArray = [];
         for (let key in this.state.searchingForm) {
             formElementsArray.push({
@@ -116,10 +135,18 @@ class SearchPanel extends Component {
                     touched={formElement.config.touched}
                     invalid={!formElement.config.valid}
                     changed={(event) => this.inputChangedHandler(event, formElement.id)} />
-                <Button btnType="Danger" disabled={false} clicked={(event) => this.stepBackHandler(event, this.state.stage)}>Cancel</Button>
-                <Button btnType="Success" disabled={false} clicked={(event) => this.stepNextHandler(event, this.state.stage)}>Next</Button>
+                <Button 
+                    btnType="Danger" 
+                    clicked={(event) => this.stepBackHandler(event, this.state.stage)}>Cancel</Button>
+                <Button 
+                    btnType="Success" 
+                    disabled={this.formValidationHandler()} 
+                    clicked={(event) => this.stepNextHandler(event, this.state.stage)}>Next</Button>
             </form>
-        )
+        );
+        if (this.state.loading) {
+            form = <Spinner />
+        }
         return (
             <div className={classes.SearchPanel}>
                 <h3>Searching panel</h3>

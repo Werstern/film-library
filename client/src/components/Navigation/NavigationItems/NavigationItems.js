@@ -6,8 +6,8 @@ import NavigationItem from './NavigationItem/NavigationItem';
 const navigationItems = (props) => (
     <ul className={classes.NavigationItems}>
         <NavigationItem 
-            link="search" 
-            onSearchStart={props.onSearchStart}>Search</NavigationItem>
+            link="search"
+            onSearching={props.onSearching} >Search</NavigationItem>
         <NavigationItem 
             link="add"
             onAdding={props.onAdding}>Add Film</NavigationItem>

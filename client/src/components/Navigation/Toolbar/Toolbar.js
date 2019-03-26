@@ -13,6 +13,7 @@ const toolbar = (props) => (
         </div>
         <nav className={classes.DesktopOnly}>
             <NavigationItems 
+                onSearching={props.onSearching} 
                 onSearchStart={props.onSearchStart}
                 onAdding={props.onAdding} />
         </nav>

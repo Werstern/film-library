@@ -25,7 +25,8 @@ class Layout extends Component {
         return (
             <Auxiliary>
                 <Toolbar 
-                    drawerToggleClicked={this.sideDrawerToggleHandler} 
+                    drawerToggleClicked={this.sideDrawerToggleHandler}
+                    onSearching={this.props.onSearching} 
                     onSearchStart={this.props.onSearchStart}
                     onAdding={this.props.onAdding}
                     onReturnHomepage={this.props.onReturnHomepage} />

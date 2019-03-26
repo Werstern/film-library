@@ -109,7 +109,7 @@ class ActionSummary extends Component {
           formIsValid: formIsValid,
           posting: false});
           
-        this.props.onAdding(false);
+        this.props.onAdding();
       });
   }
 

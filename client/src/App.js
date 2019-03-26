@@ -37,12 +37,24 @@ class App extends Component {
     this.setState({films: updatedFilms});
   }
 
-  addingHandler = (value) => {
-    this.setState({adding: value});
+  // addingHandler = (value) => {
+  //   this.setState({adding: value});
+  // }
+
+  addingHandler = () => {
+    this.setState((prevState) => {
+      return {
+        adding: !prevState.adding
+      }
+    });
   }
 
-  searchStartHandler = () => {
-    this.setState({searching: true});
+  searchingHandler = () => {
+    this.setState((prevState) => {
+      return {
+        searching: !prevState.searching
+      }
+    });
   }
 
   searchFinishHandler = (films) => {
@@ -65,10 +77,6 @@ class App extends Component {
     }
   }
 
-  searchCancelHandler = () => {
-    this.setState({searching: false});
-  }
-
   returnHomepageHandler = () => {
     this.fetchingInitialFilms();
   }
@@ -86,7 +94,7 @@ class App extends Component {
     return (
       <div>
         <Layout 
-          onSearchStart={this.searchStartHandler}
+          onSearching={this.searchingHandler}
           onAdding={this.addingHandler}
           onReturnHomepage={this.returnHomepageHandler} >
           <FilmsLibrary 
@@ -99,7 +107,7 @@ class App extends Component {
             onAdding={this.addingHandler}
             onDelete={this.deleteHandler}
             onDeletingFinish={this.deleteFinishHandler}
-            onSearchCancel={this.searchCancelHandler}
+            onSearching={this.searchingHandler}
             onSearchFinish={this.searchFinishHandler} />
         </Layout>
       </div>
