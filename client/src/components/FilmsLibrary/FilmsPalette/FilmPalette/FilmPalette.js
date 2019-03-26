@@ -1,5 +1,6 @@
 import React from 'react';
 
+import noPhoto from '../../../../assets/images/noPhoto.png';
 import classes from './FilmPalette.css';
 import deleteIcon from '../../../../assets/images/delete.png';
 
@@ -7,7 +8,7 @@ const filmPalette = (props) => {
     return (
         <div className={classes.FilmPalette}>
             <div className={classes.ImageContent}>
-                <img src={props.image} alt={props.title} />
+                <img src={props.image ? props.image : noPhoto} alt={props.title} />
             </div>
             <div className={classes.ContentInfo}>
                 <div className={classes.WrapperTitle}>
