@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const multer = require('multer');
+const {promisify} = require('util');
+const fs = require('fs');
+const readFileAsync = promisify(fs.readFile);
+
 
 const multerConfig = {
     storage: multer.diskStorage({
@@ -31,9 +35,21 @@ const multerConfig = {
 
 router.post('/import', multer(multerConfig).single('file'), (req, res) => {
     if (req.file) {
-        console.log(req.file);
-        req.body.file = req.file.filename;
+        //console.log(req.file);
+        //req.body.file = req.file.filename;
+        
+        //let parsedText = '';
+        //    parsedText += buf.toString();
+
+        readFileAsync(path.join(__dirname, '../../files/' + req.file.filename), {encoding: 'utf8'})
+            .then((text) => {
+                console.log(text);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     }
+
     res.send('Ok');
 });
 
