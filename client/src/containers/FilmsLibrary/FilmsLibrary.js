@@ -20,7 +20,7 @@ export class FilmsLibrary extends Component {
                     <h1 className={classes.FilmLibrary_Title}>Popular Movies</h1>
                     <FilmsPalette 
                         films={this.props.films}
-                        onDeletingStart={this.props.onDeletingStart} />
+                        onDelete={this.props.onDelete} />
                 </Auxiliary>
             );
         }
@@ -38,10 +38,10 @@ export class FilmsLibrary extends Component {
                 <Modal show={this.props.adding} modalClosed={() => this.props.onAdding(false)}>
                     <ActionSummary onAdding={this.props.onAdding} />
                 </Modal>
-                <Modal show={this.props.deleting} modalClosed={this.props.onDeletingCancel}>
+                <Modal show={this.props.deleting} modalClosed={() => this.props.onDelete(false, '')}>
                     <DeleteSummary 
-                        deleting_id={this.props.deleting_id}
-                        onDeletingCancel={this.props.onDeletingCancel}
+                        deleting_info={this.props.deleting_info}
+                        onDelete={this.props.onDelete}
                         onDeletingFinish={this.props.onDeletingFinish} />
                 </Modal>
                 {searching}

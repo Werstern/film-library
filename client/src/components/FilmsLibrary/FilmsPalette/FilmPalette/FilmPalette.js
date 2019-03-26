@@ -19,7 +19,7 @@ const filmPalette = (props) => {
                             <div className={classes.ReleaseYear}>{props.releaseYear}</div>
                             <div 
                                 className={classes.DeleteContainer}
-                                onClick={props.onDeletingStart}>
+                                onClick={props.onDeleting}>
                                 <img src={deleteIcon} alt="delete" />
                             </div>
                         </div>

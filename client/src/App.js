@@ -10,7 +10,7 @@ class App extends Component {
     adding: false,
     loading: false,
     deleting: false,
-    deleting_id: '',
+    deleting_info: '',
     error: ''
   }
 
@@ -18,8 +18,15 @@ class App extends Component {
     this.fetchingInitialFilms();
   }
 
-  deletingStartHandler = (id) => {
-    this.setState({deleting: true, deleting_id: id});
+  deleteHandler = (status, id) => {
+    let deleting_info = id;
+    if (id) {
+      deleting_info = [...this.state.films].filter(film => {
+        return film._id === id;
+      })[0];
+    }
+    
+    this.setState({deleting: status, deleting_info: deleting_info});
   }
 
   deleteFinishHandler = (id) => {
@@ -28,10 +35,6 @@ class App extends Component {
     });
 
     this.setState({films: updatedFilms});
-  }
-
-  deletingCancelHandler = () => {
-    this.setState({deleting: false, deleting_id: ''});
   }
 
   addingHandler = (value) => {
@@ -92,11 +95,10 @@ class App extends Component {
             adding={this.state.adding}
             searching={this.state.searching}
             deleting={this.state.deleting}
-            deleting_id={this.state.deleting_id}
+            deleting_info={this.state.deleting_info}
             onAdding={this.addingHandler}
-            onDeletingStart={this.deletingStartHandler}
+            onDelete={this.deleteHandler}
             onDeletingFinish={this.deleteFinishHandler}
-            onDeletingCancel={this.deletingCancelHandler}
             onSearchCancel={this.searchCancelHandler}
             onSearchFinish={this.searchFinishHandler} />
         </Layout>
