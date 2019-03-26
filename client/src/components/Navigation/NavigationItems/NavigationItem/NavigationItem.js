@@ -10,7 +10,7 @@ const navigationItem = (props) => {
         }
 
         if(props.link === 'add') {
-            props.onAddingStart();
+            props.onAdding(true);
         }
     };
 

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import classes from './App.css';
 
 import Layout from './hoc/Layout/Layout';
 import FilmsLibrary from './containers/FilmsLibrary/FilmsLibrary';
@@ -16,9 +15,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('/films/12')
-      .then(res => res.json())
-      .then(films => this.setState({ films }));
+    this.fetchingInitialFilms();
   }
 
   deletingStartHandler = (id) => {
@@ -37,12 +34,8 @@ class App extends Component {
     this.setState({deleting: false, deleting_id: ''});
   }
 
-  addingStartHandler = () => {
-    this.setState({adding: true});
-  }
-
-  addingCancelHandler = () => {
-    this.setState({adding: false});
+  addingHandler = (value) => {
+    this.setState({adding: value});
   }
 
   searchStartHandler = () => {
@@ -74,9 +67,16 @@ class App extends Component {
   }
 
   returnHomepageHandler = () => {
+    this.fetchingInitialFilms();
+  }
+
+  fetchingInitialFilms() {
+    this.setState({loading: true});
     fetch('/films/12')
       .then(res => res.json())
-      .then(films => this.setState({ films }));
+      .then(films => {
+        this.setState({ loading: false, films: films });
+      });
   }
 
   render() {
@@ -84,21 +84,20 @@ class App extends Component {
       <div>
         <Layout 
           onSearchStart={this.searchStartHandler}
-          onAddingStart={this.addingStartHandler}
-          onAddingCancel={this.addingCancelHandler}
+          onAdding={this.addingHandler}
           onReturnHomepage={this.returnHomepageHandler} >
-          <h1 className={classes.AppTitle}>Popular Movies</h1>
           <FilmsLibrary 
+            loading={this.state.loading}
             films={this.state.films}
             adding={this.state.adding}
             searching={this.state.searching}
-            onAdditingCancel={this.addingCancelHandler}
             deleting={this.state.deleting}
+            deleting_id={this.state.deleting_id}
+            onAdding={this.addingHandler}
             onDeletingStart={this.deletingStartHandler}
             onDeletingFinish={this.deleteFinishHandler}
             onDeletingCancel={this.deletingCancelHandler}
             onSearchCancel={this.searchCancelHandler}
-            deleting_id={this.state.deleting_id}
             onSearchFinish={this.searchFinishHandler} />
         </Layout>
       </div>

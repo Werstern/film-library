@@ -10,7 +10,7 @@ const navigationItems = (props) => (
             onSearchStart={props.onSearchStart}>Search</NavigationItem>
         <NavigationItem 
             link="add"
-            onAddingStart={props.onAddingStart}>Add Film</NavigationItem>
+            onAdding={props.onAdding}>Add Film</NavigationItem>
     </ul>
 );
 

@@ -14,7 +14,7 @@ const toolbar = (props) => (
         <nav className={classes.DesktopOnly}>
             <NavigationItems 
                 onSearchStart={props.onSearchStart}
-                onAddingStart={props.onAddingStart} />
+                onAdding={props.onAdding} />
         </nav>
     </header>
 );

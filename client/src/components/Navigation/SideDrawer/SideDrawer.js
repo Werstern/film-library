@@ -16,11 +16,11 @@ const sideDrawer = (props) => {
             <Backdrop show={props.open} clicked={props.closed} />
             <div className={attachedClasses.join(' ')} onClick={props.closed}>
                 <div className={classes.Logo}>
-                    <Logo />
+                <Logo clicked={props.onReturnHomepage} />
                 </div>
                 <nav>
-                    <NavigationItems 
-                        onAddingStart={props.onAddingStart}
+                    <NavigationItems
+                        onAdding={props.onAdding}
                         onSearchStart={props.onSearchStart} />
                 </nav>
             </div>
