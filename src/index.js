@@ -7,11 +7,13 @@ const config = require('./config.json');
 
 const filmsRoute = require('./routes/films');
 const filmRoute = require('./routes/film');
+const importRoute = require('./routes/import');
 
 app.use(bodyParser.json());
 
 app.use(filmsRoute);
 app.use(filmRoute);
+app.use(importRoute);
 app.use(express.static('public'));
 
 app.use((req, res, next) => {

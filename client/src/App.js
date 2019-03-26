@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import Layout from './hoc/Layout/Layout';
 import FilmsLibrary from './containers/FilmsLibrary/FilmsLibrary';
@@ -36,10 +37,6 @@ class App extends Component {
 
     this.setState({films: updatedFilms});
   }
-
-  // addingHandler = (value) => {
-  //   this.setState({adding: value});
-  // }
 
   addingHandler = () => {
     this.setState((prevState) => {
@@ -83,10 +80,9 @@ class App extends Component {
 
   fetchingInitialFilms() {
     this.setState({loading: true});
-    fetch('/films/12')
-      .then(res => res.json())
+    axios.get('/films/12')
       .then(films => {
-        this.setState({ loading: false, films: films });
+        this.setState({ loading: false, films: films.data });
       });
   }
 

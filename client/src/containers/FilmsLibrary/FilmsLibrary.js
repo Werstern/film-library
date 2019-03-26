@@ -16,12 +16,9 @@ export class FilmsLibrary extends Component {
         let filmPalette = <Spinner />;
         if (!this.props.loading) {
             filmPalette = (
-                <Auxiliary>
-                    <h1 className={classes.FilmLibrary_Title}>Popular Movies</h1>
-                    <FilmsPalette 
-                        films={this.props.films}
-                        onDelete={this.props.onDelete} />
-                </Auxiliary>
+                <FilmsPalette 
+                    films={this.props.films}
+                    onDelete={this.props.onDelete} />
             );
         }
 
