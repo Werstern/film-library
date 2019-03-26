@@ -11,16 +11,18 @@ const filmPalette = (props) => {
             </div>
             <div className={classes.ContentInfo}>
                 <div className={classes.WrapperTitle}>
-                    <div 
-                        className={classes.DeleteContainer}
-                        onClick={props.onDeletingStart}>
-                        <img src={deleteIcon} alt="delete" />
-                    </div>
                     <div>
                         <div className={classes.Title}>
                             {props.title}
                         </div>
-                        <span>{props.releaseYear}</span>
+                        <div className={classes.ReleaseContainer}>
+                            <div className={classes.ReleaseYear}>{props.releaseYear}</div>
+                            <div 
+                                className={classes.DeleteContainer}
+                                onClick={props.onDeletingStart}>
+                                <img src={deleteIcon} alt="delete" />
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className={classes.FilmSection}>Format Video</div>
