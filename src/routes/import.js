@@ -43,7 +43,21 @@ router.post('/import', multer(multerConfig).single('file'), (req, res) => {
 
         readFileAsync(path.join(__dirname, '../../files/' + req.file.filename), {encoding: 'utf8'})
             .then((text) => {
-                console.log(text);
+                const arrFilms = text.split(/\n\s*\n/);
+
+                const parsedArrFilms = arrFilms.map(film => {
+                    const parsedFilm = film.split('\n').reduce((result, current) => {
+                        const pair = current.split(':');
+                        if (pair[0] === 'Release Year') {
+                            result['releaseYear'] = pair[1]; 
+                        } else {
+                            result[pair[0].toLowerCase()] = pair[1];
+                        }
+                        return result;
+                    }, {});
+                    return parsedFilm;
+                });
+                console.log(parsedArrFilms);
             })
             .catch((err) => {
                 console.log(err);
