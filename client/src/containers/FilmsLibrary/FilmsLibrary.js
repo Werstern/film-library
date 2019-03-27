@@ -6,12 +6,26 @@ import Auxiliary from '../../hoc/Auxiliary/Auxiliary';
 import FilmsPalette from '../../components/FilmsLibrary/FilmsPalette/FilmsPalette';
 import Modal from '../../components/UI/Modal/Modal';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import Button from '../../components/UI/Button/Button';
 import ActionSummary from '../../components/FilmsLibrary/ActionSummary/ActionSummary';
+import FileSummary from '../../components/FilmsLibrary/FileSummary/FileSummary';
 import DeleteSummary from '../../components/FilmsLibrary/DeleteSummary/DeleteSummary';
 import SearchPanel from '../../components/FilmsLibrary/SearchPanel/SearchPanel';
 
 export class FilmsLibrary extends Component {
-    
+    state = {
+        mode: 'fileForm'
+    }
+
+    changeModeHandler = () => {
+        const mode = this.state.mode;
+        if (mode === 'addingForm') {
+            this.setState({mode: 'fileForm'});
+        } else {
+            this.setState({mode: 'addingForm'});
+        }
+    }
+
     render() {
         let filmPalette = <Spinner />;
         if (!this.props.loading) {
@@ -33,7 +47,14 @@ export class FilmsLibrary extends Component {
         return (
             <Auxiliary>
                 <Modal show={this.props.adding} modalClosed={this.props.onAdding}>
-                    <ActionSummary onAdding={this.props.onAdding} />
+                    <Button 
+                        btnType="Success" 
+                        clicked={this.changeModeHandler}>Change mode</Button>
+                    {
+                        this.state.mode === 'addingForm' ?
+                            <ActionSummary onAdding={this.props.onAdding} />
+                            : <FileSummary onAdding={this.props.onAdding} />
+                    }
                 </Modal>
                 <Modal show={this.props.deleting} modalClosed={() => this.props.onDelete(false, '')}>
                     <DeleteSummary 

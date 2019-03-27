@@ -80,7 +80,7 @@ class App extends Component {
 
   fetchingInitialFilms() {
     this.setState({loading: true});
-    axios.get('/films/12')
+    axios.get('/films/42')
       .then(films => {
         this.setState({ loading: false, films: films.data });
       });

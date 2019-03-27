@@ -1,4 +1,4 @@
-.ActionSummary {
+.FileSummary {
     margin: 20px auto;
     width: 80%;
     text-align: center;
@@ -7,13 +7,13 @@
 }
   
 @media (min-width: 600px) {
-    .ActionSummary {
+    .FileSummary {
       width: 450px;
     }
 }
 
 @media (min-width: 360px) and (max-width: 720px) {
-  .ActionSummary {
+  .FileSummary {
     margin: 0 auto;
     padding: 0;
   }
