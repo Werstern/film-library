@@ -5,10 +5,10 @@ import FilmsPalette from '../../components/FilmsLibrary/FilmsPalette/FilmsPalett
 import Modal from '../../components/UI/Modal/Modal';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Button from '../../components/UI/Button/Button';
-import ActionSummary from '../../components/FilmsLibrary/ActionSummary/ActionSummary';
-import FileSummary from '../../components/FilmsLibrary/FileSummary/FileSummary';
-import DeleteSummary from '../../components/FilmsLibrary/DeleteSummary/DeleteSummary';
-import SearchPanel from '../../components/FilmsLibrary/SearchPanel/SearchPanel';
+import ActionSummary from '../../containers/ActionSummary/ActionSummary';
+import FileSummary from '../../containers/FileSummary/FileSummary';
+import DeleteSummary from '../../containers/DeleteSummary/DeleteSummary';
+import SearchPanel from '../SearchPanel/SearchPanel';
 
 export class FilmsLibrary extends Component {
     state = {

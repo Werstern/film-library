@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import Button from '../../UI/Button/Button';
-import Spinner from '../../../components/UI/Spinner/Spinner';
+import Button from '../../components/UI/Button/Button';
+import Spinner from '../../components/UI/Spinner/Spinner';
 import classes from './FileSummary.css';
-import Input from '../../../components/UI/Input/Input';
-import { updateObject, checkValidaty } from '../../../shared/utility';
-import withErrorHandler  from '../../../hoc/withErrorHandler/withErrorHandler';
+import Input from '../../components/UI/Input/Input';
+import { updateObject, checkValidaty } from '../../shared/utility';
+import withErrorHandler  from '../../hoc/withErrorHandler/withErrorHandler';
 
 class FileSummary extends Component {
     state = {

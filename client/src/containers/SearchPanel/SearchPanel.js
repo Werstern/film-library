@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import withErrorHandler  from '../../../hoc/withErrorHandler/withErrorHandler';
-import Button from '../../UI/Button/Button';
-import Input from '../../UI/Input/Input';
-import Spinner from '../../UI/Spinner/Spinner'
-import { updateObject, checkValidaty } from '../../../shared/utility';
+import withErrorHandler  from '../../hoc/withErrorHandler/withErrorHandler';
+import Button from '../../components/UI/Button/Button';
+import Input from '../../components/UI/Input/Input';
+import Spinner from '../../components/UI/Spinner/Spinner';
+import { updateObject, checkValidaty } from '../../shared/utility';
 
 import classes from './SearchPanel.css';
 

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import Auxiliary from '../../../hoc/Auxiliary/Auxiliary';
+import Auxiliary from '../../hoc/Auxiliary/Auxiliary';
 import classes from './DeleteSummary.css';
-import Button from '../../UI/Button/Button';
-import Spinner from '../../../components/UI/Spinner/Spinner';
-import withErrorHandler  from '../../../hoc/withErrorHandler/withErrorHandler';
+import Button from '../../components/UI/Button/Button';
+import Spinner from '../../components/UI/Spinner/Spinner';
+import withErrorHandler  from '../../hoc/withErrorHandler/withErrorHandler';
 
 class DeleteSummary extends Component {
     state = {
