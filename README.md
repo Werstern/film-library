@@ -26,5 +26,5 @@ searching films by title,star, import file (extension .txt) with new information
 2.7. On server side I use NodeJs with framework Express.
 2.8. On client side I use React without Router(another way to make architecture of app), without Redux because App is small and
 state manager is no important here (Reat logic is more than enough for this App), no lazy loading components (App is small), axios form
-making AJAX request to beck-end, webpack, ES6, babel.
-2.9. The App is responsive, use flex in css, and have mobile React version - min width 360px.
+making AJAX request to beck-end, webpack, ES6, babel. In React I use class containers and functional components, also custom Higher-Order Components and another supplementary tools.
+2.9. The App is responsive, use flex in css, and have mobile React version - min width 360px. For styling app I use css modules.
