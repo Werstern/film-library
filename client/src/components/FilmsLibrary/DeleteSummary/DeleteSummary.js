@@ -5,18 +5,30 @@ import Auxiliary from '../../../hoc/Auxiliary/Auxiliary';
 import classes from './DeleteSummary.css';
 import Button from '../../UI/Button/Button';
 import Spinner from '../../../components/UI/Spinner/Spinner';
+import withErrorHandler  from '../../../hoc/withErrorHandler/withErrorHandler';
 
 class DeleteSummary extends Component {
     state = {
-        deleting: false
+        deleting: false,
+        error: ''
     }
+
     deleteItem = (id) => {
         this.setState({deleting: true});
         axios.delete(`/film/${id}`)
             .then(film => {
+                console.log(film);
                 this.props.onDeletingFinish(id);
                 this.props.onDelete(false, '');
                 this.setState({deleting: false});
+            })
+            .catch(error => {
+                console.log(error);
+                this.props.onDelete(false, '');
+                this.setState({
+                    error: error,
+                    deleting: false
+                });
             });
     };
 
@@ -43,4 +55,4 @@ class DeleteSummary extends Component {
     }
 };
 
-export default DeleteSummary;
+export default withErrorHandler(DeleteSummary, axios);

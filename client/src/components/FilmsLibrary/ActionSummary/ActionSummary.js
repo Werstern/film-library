@@ -6,6 +6,7 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import classes from './ActionSummary.css';
 import Input from '../../../components/UI/Input/Input';
 import { updateObject, checkValidaty } from '../../../shared/utility';
+import withErrorHandler  from '../../../hoc/withErrorHandler/withErrorHandler';
 
 class ActionSummary extends Component {
   state = {
@@ -74,7 +75,8 @@ class ActionSummary extends Component {
       },
     },
     formIsValid: false,
-    posting: false
+    posting: false,
+    error: ''
   }
 
   orderHandler = (event) => {
@@ -110,7 +112,11 @@ class ActionSummary extends Component {
           posting: false});
           
         this.props.onAdding();
-      });
+      })
+      .catch(error => this.setState({
+        error: error,
+        posting: false
+      }));
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
@@ -168,4 +174,4 @@ class ActionSummary extends Component {
   }
 };
 
-export default ActionSummary;
+export default withErrorHandler(ActionSummary, axios);

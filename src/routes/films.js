@@ -40,7 +40,7 @@ router.post('/films', (req, res) => {
 router.get('/films/:quantity?', (req, res) => {
   if (req.query.title) {
     FilmModel
-      .findOne({
+      .find({
         title: new RegExp(req.query.title, 'i')
       })
       .then(doc => {

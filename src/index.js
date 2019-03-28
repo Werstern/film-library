@@ -16,8 +16,9 @@ app.use(filmRoute);
 app.use(importRoute);
 app.use(express.static('public'));
 
-app.use((req, res, next) => {
-  res.status(404).send('We think you are lost');
+app.use((err, req, res, next) => {
+  console.log('azaza');
+  res.status(500).json(err);
 });
 
 app.use((err, req, res, next) => {

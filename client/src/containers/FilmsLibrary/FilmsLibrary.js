@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import classes from './FilmsLibrary.css';
-
 import Auxiliary from '../../hoc/Auxiliary/Auxiliary';
 import FilmsPalette from '../../components/FilmsLibrary/FilmsPalette/FilmsPalette';
 import Modal from '../../components/UI/Modal/Modal';

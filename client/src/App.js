@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import Layout from './hoc/Layout/Layout';
 import FilmsLibrary from './containers/FilmsLibrary/FilmsLibrary';
+import withErrorHandler  from './hoc/withErrorHandler/withErrorHandler';
 
 class App extends Component {
   state = {
@@ -83,7 +84,11 @@ class App extends Component {
     axios.get('/films/42')
       .then(films => {
         this.setState({ loading: false, films: films.data });
-      });
+      })
+      .catch(error => this.setState({
+        error: error,
+        loading: false
+      }));
   }
 
   render() {
@@ -111,4 +116,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withErrorHandler(App, axios);

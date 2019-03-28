@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import withErrorHandler  from '../../../hoc/withErrorHandler/withErrorHandler';
 import Button from '../../UI/Button/Button';
 import Input from '../../UI/Input/Input';
 import Spinner from '../../UI/Spinner/Spinner'
@@ -39,7 +40,8 @@ class SearchPanel extends Component {
         },
         formIsValid: false,
         stage: 0,
-        loading: false
+        loading: false,
+        error: ''
     }
 
     componentWillUnmount() {
@@ -62,7 +64,11 @@ class SearchPanel extends Component {
                 axios.get(`/films?${formData.type}=${formData.title ? formData.title : formData.star}`)
                     .then(films => {
                         this.props.onSearchFinish(films.data);
-                    });
+                    })
+                    .catch(error => this.setState({
+                        error: error,
+                        loading: false
+                    }));
                 break;
             default: 
                 this.setState({stage: 0})
@@ -156,4 +162,4 @@ class SearchPanel extends Component {
     }
 }
 
-export default SearchPanel;
+export default withErrorHandler(SearchPanel, axios);

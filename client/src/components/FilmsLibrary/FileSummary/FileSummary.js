@@ -6,6 +6,7 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import classes from './FileSummary.css';
 import Input from '../../../components/UI/Input/Input';
 import { updateObject, checkValidaty } from '../../../shared/utility';
+import withErrorHandler  from '../../../hoc/withErrorHandler/withErrorHandler';
 
 class FileSummary extends Component {
     state = {
@@ -25,7 +26,8 @@ class FileSummary extends Component {
             },
         },
         formIsValid: false,
-        posting: false
+        posting: false,
+        error: ''
     }
 
     orderHandler = (event) => {
@@ -46,6 +48,13 @@ class FileSummary extends Component {
                 this.setState({
                     fileForm: resetState, 
                     formIsValid: formIsValid,
+                    posting: false
+                });
+                this.props.onAdding();
+            })
+            .catch(error => {
+                this.setState({
+                    error: error,
                     posting: false
                 });
                 this.props.onAdding();
@@ -106,4 +115,4 @@ class FileSummary extends Component {
     }
 }
 
-export default FileSummary;
+export default withErrorHandler(FileSummary, axios);
