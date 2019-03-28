@@ -12,7 +12,7 @@ import SearchPanel from '../../components/FilmsLibrary/SearchPanel/SearchPanel';
 
 export class FilmsLibrary extends Component {
     state = {
-        mode: 'fileForm'
+        mode: 'addingForm'
     }
 
     changeModeHandler = () => {

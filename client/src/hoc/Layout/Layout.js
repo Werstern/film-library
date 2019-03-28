@@ -26,14 +26,13 @@ class Layout extends Component {
             <Auxiliary>
                 <Toolbar 
                     drawerToggleClicked={this.sideDrawerToggleHandler}
-                    onSearching={this.props.onSearching} 
-                    onSearchStart={this.props.onSearchStart}
+                    onSearching={this.props.onSearching}
                     onAdding={this.props.onAdding}
                     onReturnHomepage={this.props.onReturnHomepage} />
                 <SideDrawer
                     open={this.state.showSideDrawer}
                     closed={this.sideDrawerClosedHandler}
-                    onSearchStart={this.props.onSearchStart}
+                    onSearching={this.props.onSearching}
                     onAdding={this.props.onAdding}
                     onReturnHomepage={this.props.onReturnHomepage} />
                 <main className={classes.Content}>
